@@ -9,12 +9,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 
 import com.example.r4y.myapplication.Misc.BlockInfo;
 import com.example.r4y.myapplication.Misc.TokenInfo;
 import com.example.r4y.myapplication.Network.CRemoteReq;
 import com.example.r4y.myapplication.R;
+
+import java.sql.Time;
+import java.sql.Timestamp;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -24,8 +28,10 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     Button b1;
     TextView t1;
-    EditText et1;
+    MultiAutoCompleteTextView tv1;
     Button b2;
+
+
     Looper looper = Looper.myLooper();
     MyHandler myHandler = new MyHandler(looper);
 
@@ -38,13 +44,14 @@ public class MainActivity extends AppCompatActivity {
         b1 = findViewById(R.id.button);
         b2 = findViewById(R.id.button2);
         t1 = findViewById(R.id.textView);
-        et1 = findViewById(R.id.editText2);
+        tv1 = findViewById(R.id.multiAutoCompleteTextView);
 
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String raw = et1.getText().toString();
-                Log.i(TAG, "Got Text" + raw);
+//                String raw = tv1.getText().toString();
+//                Log.i(TAG, "Got Text" + raw);
+                tv1.setText("");
             }
         });
 
@@ -52,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                t1.setText(System.currentTimeMillis() + "Hello World");
+//                t1.setText(String.format("%ld ", System.currentTimeMillis()));
+                t1.setText(Long.toString(System.currentTimeMillis()));
+
                 new Thread(new requestThread()).start();
             }
         });
@@ -63,10 +72,10 @@ public class MainActivity extends AppCompatActivity {
     private void httpRequest() {
 
         CRemoteReq remoteReq = new CRemoteReq();
-        TokenInfo tokenInfo = remoteReq.reqToken();
+        //TokenInfo tokenInfo = remoteReq.reqToken();
         BlockInfo blockInfo = remoteReq.reqBlock();
 
-        sendTextMessage(blockInfo.getResult().getTimeStamp());
+        sendTextMessage(blockInfo.getResult().getBlockMiner());
 
 
     }
@@ -77,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         message.obj = context;
         // 设置消息的类型值
         message.what = MESSAGE_INFO_GOT;
-        //4.0 发送消息到handler
+        // 发送消息到handler
         myHandler.sendMessage(message);
     }
 
@@ -95,7 +104,8 @@ public class MainActivity extends AppCompatActivity {
             // super.handleMessage(msg);
             switch (msg.what) {
                 case MESSAGE_INFO_GOT:
-                    et1.setText((String) msg.obj);
+                    tv1.append("\n");
+                    tv1.append((String) msg.obj);
                     break;
                 case MESSAGE_RESULT_ERR:
                     break;
