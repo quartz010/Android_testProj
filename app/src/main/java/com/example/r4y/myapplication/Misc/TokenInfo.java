@@ -5,7 +5,6 @@ package com.example.r4y.myapplication.Misc;
  */
 
 
-
 public class TokenInfo {
 
     /**

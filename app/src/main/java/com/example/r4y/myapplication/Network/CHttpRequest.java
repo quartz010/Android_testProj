@@ -13,8 +13,8 @@ import okhttp3.Response;
 
 public class CHttpRequest {
 
-    public CHttpRequest() {}
-
+    public CHttpRequest() {
+    }
 
 
     public String httpGetRequest(String urlRequested) {
@@ -32,4 +32,5 @@ public class CHttpRequest {
             return "";
         }
     }
+
 }

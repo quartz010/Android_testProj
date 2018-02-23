@@ -14,7 +14,6 @@ public class BlockInfo {
      */
 
     private String status;
-
     private String message;
     private ResultBean result;
 

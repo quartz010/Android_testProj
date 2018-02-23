@@ -11,11 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.r4y.myapplication.R;
-import com.example.r4y.myapplication.Network.CHttpRequest;
-import com.example.r4y.myapplication.Misc.TokenInfo;
 import com.example.r4y.myapplication.Misc.BlockInfo;
-import com.example.r4y.myapplication.Network.CJson;
+import com.example.r4y.myapplication.Misc.TokenInfo;
+import com.example.r4y.myapplication.R;
+import com.example.r4y.myapplication.Network.CRemoteReq;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
     Looper looper = Looper.myLooper();
     MyHandler myHandler = new MyHandler(looper);
-    CHttpRequest httpCli = new CHttpRequest();
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -97,22 +96,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void httpRequest() {
 
-        String tokenUrl = "https://api.etherscan.io/api?module=stats&action=tokensupply&" +
-                "contractaddress=0x57d90b64a1a57749b0f932f1a3395792e12e7055&apikey=YourApiKeyToken";
-//        String tokenUrl = "https://api.etherscan.io/api?module=block&action=getblockreward&" +
+//        String tokenUrl = "https://api.etherscan.io/api?module=stats&action=tokensupply&" +
+//                "contractaddress=0x57d90b64a1a57749b0f932f1a3395792e12e7055&apikey=YourApiKeyToken";
+//      String tokenUrl = "https://api.etherscan.io/api?module=block&action=getblockreward&" +
 //                "blockno=2165403&apikey=YourApiKeyToken";
 
-        String context = httpCli.httpGetRequest(tokenUrl);
-        if (!context.isEmpty()) {
-            Log.i("Request", " onResponse() result=" + context);
+        CRemoteReq remoteReq = new CRemoteReq();
+        TokenInfo tokenInfo =  remoteReq.reqToken();
+        BlockInfo blockInfo = remoteReq.reqBlock();
 
-            CJson json = new CJson();
-
-            TokenInfo tokenInfo = json.resolveTokenI(context);
+        sendTextMessage(blockInfo.getResult().getTimeStamp());
 
 
-            sendTextMessage(tokenInfo.getMessage());
-        }
 
     }
 

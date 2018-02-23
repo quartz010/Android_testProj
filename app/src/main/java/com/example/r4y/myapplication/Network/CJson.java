@@ -3,23 +3,17 @@ package com.example.r4y.myapplication.Network;
 /**
  * Created by r4y on 2018/2/22.
  */
-import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.example.r4y.myapplication.Misc.TokenInfo;
 import com.example.r4y.myapplication.Misc.BlockInfo;
+import com.example.r4y.myapplication.Misc.TokenInfo;
+import com.google.gson.Gson;
 
 public class CJson {
 
     private static final String TAG = CJson.class.getSimpleName();
 
-    public  CJson() {}
+    public CJson() {
+    }
 
 
     //json数据为数组使用这种方式获取，即地址有多条数据
@@ -28,11 +22,7 @@ public class CJson {
 
         Gson gson = new Gson();
 
-        Log.i(TAG, "resolveTokenI: " + raw);
-
-        TokenInfo tokenInfo = gson.fromJson(raw, TokenInfo.class);
-
-        return tokenInfo;
+        return gson.fromJson(raw, TokenInfo.class);
 
     }
 
@@ -40,11 +30,6 @@ public class CJson {
 
         Gson gson = new Gson();
 
-        ArrayList<BlockInfo> blockInfos =
-                gson.fromJson(raw, new TypeToken<List<BlockInfo>>(){}.getType());
-
-        return blockInfos.get(0);
+        return gson.fromJson(raw, BlockInfo.class);
     }
-
-
 }
