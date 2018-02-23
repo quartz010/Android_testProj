@@ -13,7 +13,9 @@ import android.widget.TextView;
 
 import com.example.r4y.myapplication.R;
 import com.example.r4y.myapplication.Network.CHttpRequest;
-
+import com.example.r4y.myapplication.Misc.TokenInfo;
+import com.example.r4y.myapplication.Misc.BlockInfo;
+import com.example.r4y.myapplication.Network.CJson;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -103,7 +105,13 @@ public class MainActivity extends AppCompatActivity {
         String context = httpCli.httpGetRequest(tokenUrl);
         if (!context.isEmpty()) {
             Log.i("Request", " onResponse() result=" + context);
-            sendTextMessage(context);
+
+            CJson json = new CJson();
+
+            TokenInfo tokenInfo = json.resolveTokenI(context);
+
+
+            sendTextMessage(tokenInfo.getMessage());
         }
 
     }

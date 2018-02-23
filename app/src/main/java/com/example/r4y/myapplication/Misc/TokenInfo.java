@@ -4,6 +4,8 @@ package com.example.r4y.myapplication.Misc;
  * Created by r4y on 2018/2/22.
  */
 
+
+
 public class TokenInfo {
 
     /**

@@ -13,7 +13,7 @@ import okhttp3.Response;
 
 public class CHttpRequest {
 
-    CHttpRequest() {}
+    public CHttpRequest() {}
 
 
 
@@ -29,7 +29,7 @@ public class CHttpRequest {
 
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
+            return "";
         }
     }
 }
