@@ -6,7 +6,6 @@ import com.example.r4y.myapplication.Misc.BlockInfo;
 import com.example.r4y.myapplication.Misc.TokenInfo;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by r4y on 2018/2/23.
@@ -15,25 +14,24 @@ import java.util.Map;
 public class CRemoteReq {
 
     private CHttpRequest httpCli;
+    private HashMap<String, String> urlMap = new HashMap<String, String>() {
+        {
+            // token
+            put("token", "https://api.etherscan.io/api?module=stats&action=tokensupply&" +
+                    "contractaddress=0x57d90b64a1a57749b0f932f1a3395792e12e7055&apikey=YourApiKeyToken");
+            // block
+            put("block", "https://api.etherscan.io/api?module=block&action=getblockreward&" +
+                    "blockno=2165403&apikey=YourApiKeyToken");
+
+        }
+
+    };
 
     public CRemoteReq() {
 
         httpCli = new CHttpRequest();
 
     }
-
-    private HashMap<String, String> urlMap = new HashMap<String, String>() {
-        {
-        // token
-        put("token", "https://api.etherscan.io/api?module=stats&action=tokensupply&" +
-                "contractaddress=0x57d90b64a1a57749b0f932f1a3395792e12e7055&apikey=YourApiKeyToken");
-        // block
-        put("block", "https://api.etherscan.io/api?module=block&action=getblockreward&"+
-                "blockno=2165403&apikey=YourApiKeyToken");
-
-        }
-
-    };
 
     public TokenInfo reqToken() {
 
