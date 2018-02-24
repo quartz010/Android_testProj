@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         //TokenInfo tokenInfo = remoteReq.reqToken();
         BlockInfo blockInfo = remoteReq.reqBlock();
 
-        sendTextMessage(blockInfo.getResult().getBlockMiner());
+        sendTextMessage(blockInfo.getResult());
 
 
     }

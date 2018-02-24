@@ -28,5 +28,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     //    third-party OKHTTP
     implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+    // gson
     implementation 'com.google.code.gson:gson:2.2.4'
+    // web3j
+    compile 'org.web3j:core:3.1.1-android'
+    implementation files('libs/slf4j-jdk14-1.7.25.jar')
 }
