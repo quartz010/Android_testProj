@@ -12,10 +12,24 @@ public class Web3jTest {
     private CWeb3j web3j = new CWeb3j();
 
     @Test
-    public void RequestTest() throws Exception {
+    public void getVersion() throws Exception {
 
         System.out.println(web3j.getClientVersion());
     }
 
+    @Test
+    public  void getBalance() throws Exception {
+
+        String banlance;
+        String address = "0x5d6aa4187c1788dc958566248c416e290437efbe";
+
+        System.out.println(web3j.getBalance(address));
+    }
+
+    @Test
+    public void unlockAccount() throws Exception {
+
+        web3j.unlockAccount();
+    }
 
 }
